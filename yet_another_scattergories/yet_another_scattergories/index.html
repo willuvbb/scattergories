@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- <meta charset="utf-8" /> -->
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1" /> -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap" rel="stylesheet">
+    <!-- <title>Bootstrap npm starter</title> -->
+  </head>
+  <body>
+    <div class="App">
+        <div class="game">
+          <div class="leftCol">
+              <div class="letterWrap">
+                <div class="label">Letter</div>
+                <div id="rerollButton" class="clickable labelRight">Re-roll</div>
+                <!-- <span class="bigLetter">Q</span> -->
+                <!-- <div class="bigLetter">Q</div> -->
+                <div class="bigLetter"><span>Q</span></div>
+              </div>
+            <div class="subcol">
+              <div class="timeWrap">
+                <div class="label">Time</div>
+                <div id="changeTimeButton" class="labelRight clickable">Change</div>
+                <div class="timer">120</div>
+              </div>
+              <div class="playWrap clickable dottedOnHover">
+                  <div class="label">Play</div>
+                  <svg width="32px" height="32px" viewBox="6 6 24 24"><path d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28 "></path></svg>
+                </div>
+            </div>
+          </div>
+          <div class="categoriesCol yellow">
+              <div class="categoriesHeader">
+                <div class="label">Categories</div>
+                <div  class="labelRight">
+                    <div class="clickable" id="decrementButton">-</div>
+                    <span id="categoriesCounter">5</span>
+                    <div class="clickable" id="incrementButton">+</div>
+
+                </div>
+              </div>
+              <div class="listContainer">
+                <div class="categoryScroller">
+                    <div class="categoryWrap">
+                        <div class="number">1</div>
+                        <div class="category">
+                            <span>Things to do</span>
+                        </div>
+                    </div>
+                    <div class="categoryWrap">
+                        <div class="number">2</div>
+                        <div class="category">
+                            <span>A dog's name</span>
+                        </div>
+                    </div>
+                    <div class="categoryWrap">
+                        <div class="number">3</div>
+                        <div class="category">
+                            <span>A boy's name</span>
+                        </div>
+                    </div>
+                    <div class="categoryWrap">
+                        <div class="number">4</div>
+                        <div class="category">
+                            <span>A girl's name</span>
+                        </div>
+                    </div>
+                    <div class="categoryWrap">
+                        <div class="number">5</div>
+                        <div class="category">
+                            <span>Something you find indoors</span>
+                        </div>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="restartCol clickable dottedOnHover">Restart
+
+            <div class="refresh-icon-wrap">
+                <svg viewBox="0 512 24 24" style="opacity: 1; transform: translateY(0px);">&nbsp;<use xlink:href="#refresh-cw"></use>&nbsp;</svg>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="footer">
+            <div class="bottomLink clickable">
+                <a target="_blank" href="https://wlcworks.ml"><b>WLC Works</b></a>
+            </div>
+            <div id="flipColorsButton" class="bottomLink bottomRight clickable">
+                Flip Colors
+            </div>
+            <div id="changeColorsButton" class="bottomLink  clickable">
+                Change Colors
+            </div>
+        </div>
+    <script src="yet_another_scattergories.js"></script>
+  </body>
+</html>
