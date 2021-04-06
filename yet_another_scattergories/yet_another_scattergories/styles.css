@@ -87,23 +87,14 @@ a {
 
 .leftCol {
   height: 100%;
-  width: 35%;
+  width: 30%;
   flex: 1 0 35%;
-  /* height: 100%; */
-  /* width: 33%; */
-  /* display: flex;
-  flex: 1 0 auto;
-  padding: 1em; or rem??
-  flex-direction: column;
-  position: relative;
-  align-items: center;
-  justify-content: center; */
   border-right: 3px solid var(--main-text-color, #000);
 }
 
 .restartCol {
-  /* height: 100%; */
-  /* width: 33%; */
+  height: 100%;
+  width: 15%;
   display: flex;
   flex: 1 0 auto;
   /* padding: 1em; or rem?? */
@@ -127,12 +118,6 @@ a {
 }
 
 .listContainer {
-  /* width: 100%;
-  position: relative;
-  top: 2em;
-  overflow-y: scroll;
-  font-size: 1.5em; */
-
   font-size: 1.5em;
   padding: 0 0 2rem;
   position: absolute;
@@ -220,16 +205,12 @@ a {
   justify-content: center;
   flex: 1 1 150px;
   border-right: 3px solid var(--main-text-color, #000);
-  /* margin: 1em; or rem?? */
-
-  /* height: 100%; */
-  /* width: 100%; */
 }
 
 .clickable {
   cursor: pointer;
 }
-.playWrap {
+.playPauseWrap {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -238,7 +219,7 @@ a {
   flex: 1 1 150px;
 }
 
-.playWrap svg {
+.playPauseWrap svg {
   height: 5rem;
   width: 5rem;
   fill: var(--main-text-color, #000);
@@ -260,6 +241,10 @@ a {
   opacity: 50%;
 }
 
+.labelRight.clickable:hover {
+  opacity: 90%;
+}
+
 .labelRight .clickable {
   display: inline-block;
   /* font-family: Didactic; */
@@ -275,9 +260,30 @@ a {
 }
 
 .bigLetter {
-  font-size: 8em;
+  font-size: 14em;
+  font-weight: 700;
 }
 
 .timer {
-  font-size: 4em;
+  font-size: 6em;
+}
+
+.timerInput {
+  width: 100%;
+  font-size: 5em;
+  background-color: var(--main-bg-color, #eee);
+  color: var(--main-text-color, #000);
+}
+
+#setTimeButton {
+  display: flex;
+  justify-content: center;
+}
+
+.hide {
+  display: none !important;
+}
+
+.hiddenCategory {
+  background-color: var(--main-text-color, #000);
 }

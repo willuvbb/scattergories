@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600&display=swap" rel="stylesheet">
-    <!-- <title>Bootstrap npm starter</title> -->
+    <title>Scattergories</title>
   </head>
   <body>
     <div class="App">
@@ -23,13 +23,24 @@
               <div class="timeWrap">
                 <div class="label">Time</div>
                 <div id="changeTimeButton" class="labelRight clickable">Change</div>
-                <div class="timer">120</div>
-              </div>
-              <div class="playWrap clickable dottedOnHover">
-                  <div class="label">Play</div>
-                  <svg width="32px" height="32px" viewBox="6 6 24 24"><path d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28 "></path></svg>
+                <div id="timer" class="timer">120</div>
+                <div>
+                  <input class="timer timerInput hide" type="number"/>
+                  <div id="setTimeButton" class="clickable hide"><span>Set Time</span></div>
                 </div>
+              </div>
+              <div id="playButton" class="playPauseWrap clickable dottedOnHover">
+                <div class="label">Play</div>
+                <svg width="32px" height="32px" viewBox="6 6 24 24"><path d="M11,10 L18,13.74 18,22.28 11,26 M18,13.74 L26,18 26,18 18,22.28 "></path></svg>
+              </div>
+              <div id="pauseButton" class="playPauseWrap clickable dottedOnHover hide">
+                <div class="label">Pause</div>
+                <svg width="32px" height="32px" viewBox="6 6 24 24"><path d="M11,10 L17,10 17,26 11,26 M20,10 L26,10 26,26 20,26 "></path></svg>
+              </div>
+
+              
             </div>
+
           </div>
           <div class="categoriesCol yellow">
               <div class="categoriesHeader">
@@ -96,6 +107,9 @@
                 Change Colors
             </div>
         </div>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="color-scheme.min.js"></script>
+    <script src="jquery-3.6.0.js"></script>
     <script src="yet_another_scattergories.js"></script>
   </body>
 </html>

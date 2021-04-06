@@ -229,22 +229,6 @@ const getRandomLetter = () => {
   return randomCharacter;
 };
 
-{
-  /*
-
-<div class="categoryWrap">
-    <div class="number">3</div>
-    <div class="category">
-        <span>A boy's name</span>
-    </div>
-</div>
-
-*/
-}
-
-// const compareNumbers = (a, b) => {
-//   return a - b;
-// };
 const hasDuplicates = (arrayOfIndicies) => {
   //   console.log(arrayOfIndicies);
   arrayOfIndicies.sort(function (a, b) {
@@ -312,56 +296,181 @@ const renderCategories = (
   }
 };
 
-const timer = () => {
-  let sec = timerCountDownFrom;
-  const timer = setInterval(function () {
-    // document.getElementById("safeTimerDisplay").innerHTML = "00:" + sec;
-    timerValue.innerText = sec;
-    sec--;
-    if (sec < 0) {
-      clearInterval(timer);
-    }
+// function timeToString(time) {
+//   let diffInHrs = time / 3600000;
+//   let hh = Math.floor(diffInHrs);
+
+//   let diffInMin = (diffInHrs - hh) * 60;
+//   let mm = Math.floor(diffInMin);
+
+//   let diffInSec = (diffInMin - mm) * 60;
+//   let ss = Math.floor(diffInSec);
+
+//   let diffInMs = (diffInSec - ss) * 100;
+//   let ms = Math.floor(diffInMs);
+
+//   let formattedMM = mm.toString().padStart(2, "0");
+//   let formattedSS = ss.toString().padStart(2, "0");
+//   let formattedMS = ms.toString().padStart(2, "0");
+
+//   return `${formattedMM}:${formattedSS}:${formattedMS}`;
+// }
+
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+
+let totalTime = 120000;
+let remainingTime;
+
+let timeIsBeingEdited = false;
+
+function start() {
+  if (timeIsBeingEdited) setTime();
+  startTime = Date.now() - elapsedTime;
+  timerInterval = setInterval(function printTime() {
+    elapsedTime = Date.now() - startTime;
+    remainingTime = totalTime - elapsedTime;
+    timerValue.innerText = Math.round(remainingTime / 1000);
   }, 1000);
+  playButton.classList.add("hide");
+  pauseButton.classList.remove("hide");
+  showCategories();
+}
+
+function pause() {
+  clearInterval(timerInterval);
+  playButton.classList.remove("hide");
+  pauseButton.classList.add("hide");
+  hideCategories();
+}
+
+function reset() {
+  if (timeIsBeingEdited) setTime();
+  clearInterval(timerInterval);
+  remainingTime = totalTime;
+  // print(timeToString(totalTime));
+  timerValue.innerText = Math.round(totalTime / 1000);
+  elapsedTime = 0;
+  playButton.classList.remove("hide");
+  pauseButton.classList.add("hide");
+  // showButton("PLAY");
+  renderCategories();
+  reroll();
+  hideCategories();
+}
+
+// forEach method, could be shipped as part of an Object Literal/Module
+var forEach = function (array, callback, scope) {
+  for (var i = 0; i < array.length; i++) {
+    callback.call(scope, i, array[i]); // passes back stuff we need
+  }
+};
+
+const hideCategories = () => {
+  let myCategories = document.querySelectorAll(".category");
+  forEach(myCategories, function (index, value) {
+    console.log(index, value); // passes index + value back!
+    value.classList.add("hiddenCategory");
+  });
+};
+
+const showCategories = () => {
+  let myCategories = document.querySelectorAll(".category");
+  forEach(myCategories, function (index, value) {
+    console.log(index, value); // passes index + value back!
+    value.classList.remove("hiddenCategory");
+  });
 };
 
 // Add buttons and event listeners
-const playButton = document.querySelector(".playWrap");
+const playButton = document.querySelector("#playButton");
 playButton.addEventListener("click", () => {
   console.log("play button clicked!");
-  timer();
+  // $(#playButton).toggleClass("hide");
+  // $(#pauseButton).toggleClass("hide");
+  start();
+});
+
+const pauseButton = document.querySelector("#pauseButton");
+pauseButton.addEventListener("click", () => {
+  console.log("pause button clicked!");
+  pause();
 });
 
 const resetButton = document.querySelector(".restartCol");
 resetButton.addEventListener("click", () => {
   console.log("reset button clicked!");
-  renderCategories();
+  reset();
 });
 
 const currentLetter = document.querySelector(".bigLetter");
+
+const reroll = () => {
+  currentLetter.innerHTML = getRandomLetter();
+};
 
 const rerollButton = document.querySelector("#rerollButton");
 rerollButton.addEventListener("click", () => {
   console.log("reroll letter button clicked");
   //   console.log(getRandomLetter());
-  currentLetter.innerHTML = getRandomLetter();
+  reroll();
 });
+
+const editTime = () => {
+  timeIsBeingEdited = true;
+  timerDisp.classList.add("hide");
+  timerInput.classList.remove("hide");
+  setTimeButton.classList.remove("hide");
+  // timerInput.value = totalTime / 1000;
+  timerInput.value = timerValue.innerText;
+  pause();
+};
+
+const setTime = () => {
+  console.log(timerInput.value);
+  timerDisp.classList.remove("hide");
+  timerInput.classList.add("hide");
+  setTimeButton.classList.add("hide");
+  totalTime = timerInput.value * 1000;
+  reset();
+  timeIsBeingEdited = false;
+};
 
 const changeTimeButton = document.querySelector("#changeTimeButton");
 changeTimeButton.addEventListener("click", () => {
-  const newColor = generateRandomColor();
-  console.log(newColor);
+  console.log("change time button clicked");
+  timeIsBeingEdited ? setTime() : editTime();
 });
 
+const setTimeButton = document.querySelector("#setTimeButton");
+setTimeButton.addEventListener("click", () => {
+  console.log("set time button clicked");
+  setTime();
+});
+
+const timerDisp = document.querySelector("#timer");
+const timerInput = document.querySelector(".timerInput");
+
+const flipColors = () => {
+  let color1 = document.documentElement.style.getPropertyValue(
+    "--main-text-color"
+  );
+  console.log("color1", color1);
+  let color2 = document.documentElement.style.getPropertyValue(
+    "--main-bg-color"
+  );
+  console.log("color2", color2);
+  document.documentElement.style.setProperty("--main-text-color", color2);
+  document.documentElement.style.setProperty("--main-bg-color", color1);
+};
 const flipColorsButton = document.querySelector("#flipColorsButton");
 flipColorsButton.addEventListener("click", () => {
   console.log("flip colors button clicked");
-  document.documentElement.style.setProperty("--main-text-color", "#000");
-  document.documentElement.style.setProperty("--main-bg-color", "#eee");
+  flipColors();
 });
 
-const changeColorsButton = document.querySelector("#changeColorsButton");
-changeColorsButton.addEventListener("click", () => {
-  console.log("change colors button clicked");
+const changeColors = () => {
   document.documentElement.style.setProperty(
     "--main-text-color",
     generateRandomColor()
@@ -370,6 +479,12 @@ changeColorsButton.addEventListener("click", () => {
     "--main-bg-color",
     generateRandomColor()
   );
+};
+
+const changeColorsButton = document.querySelector("#changeColorsButton");
+changeColorsButton.addEventListener("click", () => {
+  console.log("change colors button clicked");
+  changeColors();
 });
 
 const decrementButton = document.querySelector("#decrementButton");
@@ -395,8 +510,13 @@ incrementButton.addEventListener("click", () => {
 let categoriesCount = 5;
 const categoriesCounter = document.querySelector("#categoriesCounter");
 categoriesCounter.innerText = categoriesCount;
+changeColors();
+reroll();
+hideCategories();
 
 //Initial timer
 let timerCountDownFrom = 120;
 const timerValue = document.querySelector(".timer");
 timerValue.innerText = timerCountDownFrom;
+
+// $(".category").toggleClass("hiddenCategory")
