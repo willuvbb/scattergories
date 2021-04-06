@@ -345,8 +345,8 @@ function pause() {
   hideCategories();
 }
 
-function reset() {
-  if (timeIsBeingEdited) setTime();
+function resetTime() {
+  if (timeIsBeingEdited) setTime((calledFromReset = true));
   clearInterval(timerInterval);
   remainingTime = totalTime;
   // print(timeToString(totalTime));
@@ -354,7 +354,9 @@ function reset() {
   elapsedTime = 0;
   playButton.classList.remove("hide");
   pauseButton.classList.add("hide");
-  // showButton("PLAY");
+}
+
+function resetLetteryBois() {
   renderCategories();
   reroll();
   hideCategories();
@@ -401,7 +403,8 @@ pauseButton.addEventListener("click", () => {
 const resetButton = document.querySelector(".restartCol");
 resetButton.addEventListener("click", () => {
   console.log("reset button clicked!");
-  reset();
+  resetTime();
+  resetLetteryBois();
 });
 
 const currentLetter = document.querySelector(".bigLetter");
@@ -427,13 +430,13 @@ const editTime = () => {
   pause();
 };
 
-const setTime = () => {
+const setTime = (calledFromReset = false) => {
   console.log(timerInput.value);
   timerDisp.classList.remove("hide");
   timerInput.classList.add("hide");
   setTimeButton.classList.add("hide");
   totalTime = timerInput.value * 1000;
-  reset();
+  if (!calledFromReset) resetTime();
   timeIsBeingEdited = false;
 };
 
